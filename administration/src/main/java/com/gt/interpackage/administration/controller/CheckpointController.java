@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin (origins = Constants.URL_FRONTEND, allowCredentials = "true")
 @RestController
 @RequestMapping (Constants.API_V1_ADMIN + "/checkpoint")
 public class CheckpointController {
@@ -20,6 +19,7 @@ public class CheckpointController {
         try {
             return checkpointService.updateCheckpoint(update, id, false);
         } catch (Exception e) {
+            // Error 500 Internal Server Error
             return ResponseEntity
                     .internalServerError()
                     .build();
@@ -31,6 +31,7 @@ public class CheckpointController {
         try {
             return checkpointService.updateCheckpoint(update, id, true);
         } catch (Exception e) {
+            // Error 500 Internal Server Error
             return ResponseEntity
                     .internalServerError()
                     .build();
