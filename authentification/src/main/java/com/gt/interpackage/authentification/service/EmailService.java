@@ -51,7 +51,6 @@ public class EmailService {
             javaMailSender.send(message);
             return true;
         } catch (MessagingException e) {
-            System.out.println(e.toString());
             return false;
         } 
     }
