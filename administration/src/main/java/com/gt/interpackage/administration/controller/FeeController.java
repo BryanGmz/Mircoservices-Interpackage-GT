@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin (origins = Constants.URL_FRONTEND, allowCredentials = "true")
 @RestController
 @RequestMapping (Constants.API_V1_ADMIN + "/fee")
 public class FeeController {

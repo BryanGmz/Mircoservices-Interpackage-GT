@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin (origins = Constants.URL_FRONTEND, allowCredentials = "true")
 @RestController
 @RequestMapping (Constants.API_V1_AUTH + "/employee")
 public class EmployeeController {
