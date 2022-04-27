@@ -12,12 +12,17 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class EmployeeService {
 
     @Autowired
     private EmployeeRepository employeeRepository;
+
+    @Autowired
+    private EmployeeTypeService employeeTypeService;
 
     public ResponseEntity<Page<Employee>> findAll(Pageable pageable){
         Page<Employee> employees = employeeRepository.findAll(pageable);
@@ -94,6 +99,7 @@ public class EmployeeService {
     
     
     
+
     public Employee getByCUI(Long CUI) throws Exception {
         try {
             Employee employee = employeeRepository.getById(CUI);
@@ -103,5 +109,10 @@ public class EmployeeService {
         } catch(EntityNotFoundException e){
             return null;
         }
+    }
+
+    public Optional<List<Employee>> getAllOperatorsByCUI(String cui){
+        Long operatorTypeId = employeeTypeService.getEmployeeTypeByName("operator").getId();
+        return employeeRepository.findByCuiContainsAndEmployeeTypeIs(cui, Integer.parseInt(operatorTypeId.toString()));
     }
 }

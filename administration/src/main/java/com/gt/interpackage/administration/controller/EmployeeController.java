@@ -85,6 +85,17 @@ public class EmployeeController {
             return ResponseEntity.internalServerError().build();
         }
     }
+
+
+    @GetMapping(value ="/search-by-cui/{cui}")
+    public ResponseEntity<List<Employee>> getOperatorsByCUI(@PathVariable String cui){
+        try{
+            return  ResponseEntity.ok(_employeeService.getAllOperatorsByCUI(cui).get());
+        } catch(Exception e){
+            return new ResponseEntity("Error en el servidor.\n" + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+}
     
 //      /**
 //     * Metodo que realiza una llamada al servicio de empleados para obtener todos los 
@@ -154,4 +165,3 @@ public class EmployeeController {
 //                    .build();
 //        }
 //    }
-}
