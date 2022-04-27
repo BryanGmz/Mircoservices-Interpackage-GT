@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.gt.interpackage.administration.pk;
 
 import com.gt.interpackage.administration.model.Checkpoint;
@@ -14,13 +10,14 @@ import java.util.Objects;
  *
  * @author bryan
  */
+
 public class PKPackageCheckpoint implements Serializable {
 
     private Checkpoint checkpoint;
     private Package packages;
 
     public PKPackageCheckpoint() { }
-    
+
     public PKPackageCheckpoint(Checkpoint checkpoint, Package packages) {
         this.checkpoint = checkpoint;
         this.packages = packages;
@@ -67,5 +64,5 @@ public class PKPackageCheckpoint implements Serializable {
     public void setPackages(Package packages) {
         this.packages = packages;
     }
-    
+
 }

@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.HashMap;
@@ -20,7 +19,15 @@ public class EmployeeService {
     private EmployeeRepository employeeRepository;
 
     public <S extends Employee> S save(S entity){
-        return employeeRepository.save(entity);
+        try {
+            return employeeRepository.save(entity);
+        } catch(Exception e){
+            return null;
+        }
+    }
+
+    public Employee getByCUI(Long cui) throws Exception {
+        return employeeRepository.getById(cui);
     }
 
     public Employee getUserByUsernameOrEmail(String usernameOrEmail) throws Exception {

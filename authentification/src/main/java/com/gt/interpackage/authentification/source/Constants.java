@@ -6,10 +6,15 @@ package com.gt.interpackage.authentification.source;
 
 /**
  *
+<<<<<<< HEAD
  * @author bryan
+=======
+ * @author Luis
+>>>>>>> master
  */
 public class Constants {
 
     public static final String URL_FRONTEND = "http://localhost:4200/";
     public static final String API_V1_AUTH = "/api/authentication/v1";
+
 }

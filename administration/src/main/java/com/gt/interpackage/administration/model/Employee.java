@@ -53,6 +53,27 @@ public class Employee {
         this.activo = activo;
     }
 
+    public Employee(Long CUI, String name, String lastname, Integer type, String password, String email, String username, Boolean activo) {
+        this.CUI = CUI;
+        this.name = name;
+        this.lastname = lastname;
+        this.type = type;
+        this.password = password;
+        this.username = username;
+        this.email = email;
+        this.activo = activo;
+    }
+    
+    public Employee(String name, String lastname, Integer type, String password, String email, String username, Boolean activo) {
+        this.name = name;
+        this.lastname = lastname;
+        this.type = type;
+        this.password = password;
+        this.username = username;
+        this.email = email;
+        this.activo = activo;
+    }
+    
     public Long getCUI() {
         return CUI;
     }

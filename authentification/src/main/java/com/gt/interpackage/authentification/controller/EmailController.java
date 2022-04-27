@@ -9,10 +9,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
-
 @CrossOrigin(origins = Constants.URL_FRONTEND, allowCredentials = "true")
 @RestController
 @RequestMapping (Constants.API_V1_AUTH + "/email")

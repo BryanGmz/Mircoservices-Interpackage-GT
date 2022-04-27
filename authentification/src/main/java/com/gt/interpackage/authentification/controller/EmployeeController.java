@@ -36,4 +36,5 @@ public class EmployeeController {
     public ResponseEntity<?> changePassword(@RequestBody ChangePasswordDTO changePasswordDTO){
         return employeeService.changePassword(changePasswordDTO);
     }
+
 }

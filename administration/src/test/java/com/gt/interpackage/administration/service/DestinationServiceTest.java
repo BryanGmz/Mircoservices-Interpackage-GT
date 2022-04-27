@@ -1,5 +1,6 @@
 package com.gt.interpackage.administration.service;
 
+import com.gt.interpackage.administration.service.DestinationService;
 import com.gt.interpackage.administration.model.Destination;
 import com.gt.interpackage.administration.repository.DestinationRepository;
 import org.junit.jupiter.api.BeforeEach;

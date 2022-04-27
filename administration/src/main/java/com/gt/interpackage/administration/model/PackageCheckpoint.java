@@ -5,6 +5,14 @@ import com.gt.interpackage.administration.pk.PKPackageCheckpoint;
 import javax.persistence.*;
 import java.sql.Date;
 import java.sql.Time;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
 
 @Entity
 @Table(name = "package_checkpoint")
@@ -78,4 +86,5 @@ public class PackageCheckpoint {
     public void setDate(Date date) {
         this.date = date;
     }
+
 }

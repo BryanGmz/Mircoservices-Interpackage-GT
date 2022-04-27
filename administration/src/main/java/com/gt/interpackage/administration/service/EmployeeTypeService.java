@@ -20,4 +20,13 @@ public class EmployeeTypeService {
     public EmployeeType getEmployeeTypeByName(String name){
         return employeeTypeRepository.findByName(name).get();
     }
+
+    public EmployeeType create(EmployeeType employeeType){
+        return employeeTypeRepository.save(employeeType);
+    }
+
+    public void deleteAllTypes(){
+        if(employeeTypeRepository.count() > 0)
+            employeeTypeRepository.deleteAll();
+    }
 }
