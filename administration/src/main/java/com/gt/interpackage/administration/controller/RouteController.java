@@ -38,6 +38,9 @@ public class RouteController {
         } catch(BadRequestException b){
             return new ResponseEntity(b.getMessage(), HttpStatus.BAD_REQUEST);
         } catch(Exception e){
+            System.out.println(e.getLocalizedMessage());
+            System.out.println(e.getCause());
+            System.out.println(e.getStackTrace());
             return new ResponseEntity("Error en el servidor.\n" + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
