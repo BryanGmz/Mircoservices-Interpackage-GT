@@ -11,6 +11,8 @@ import java.util.List;
 import javax.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 /**
@@ -34,23 +36,7 @@ public class PackageService {
             return null;
         }
     }
-    
-//    /*
-//     * Metodo que llama al repositorio de paquetes para obtener una paginacion 
-//     * con todos los paquetes que se encuentran en destino y no han sido retirados.
-//    */
-//    public Page<Package> getAllAtDestination(Pageable pageable){
-//        return _packageRepository.findAllByAtDestinationTrueAndRetiredFalse(pageable);
-//    }
-//
-//    /*
-//     * Metodo que llama al repositorio de paquetes para obtener una paginacion 
-//     * con todos los paquetes que se encuentran en ruta.
-//    */
-//    public Page<Package> getAllOnRoute(Pageable pageable){
-//        return _packageRepository.findAllByOnWayTrue(pageable);
-//    }
-    
+
     /*
      * Metodo que llama al repositorio de paquetes para agregar
      * un nuevo paquete a la bse de datos
@@ -76,20 +62,20 @@ public class PackageService {
             return _packageRepository.save(pack);
         } return null;        
     }
-    
-//    /**
-//     * Metodo que hace uso del repositorio de paquetes para obtener 
-//     * un listado de paquetes cuyo id de factura sea igual al parametro que se
-//     * recibe.
-//     * @param id
-//     * @return 
-//     */
-//    public List<Package> getPackagesOnRouteByInoviceId(Long id){
-//        return _packageRepository.findAllByInvoiceIdAndOnWayTrue(id);
-//    }
-    
+
     public List<Package> getPackagesByInvoice(Long id_invoice){
         return _packageRepository.getPackagesByInvoice(id_invoice);
     }
-    
+
+    public Page<Package> getAllAtDestination(int page, int size){
+        return _packageRepository.findAllByAtDestinationTrueAndRetiredFalse(PageRequest.of(page, size));
+    }
+
+    public Page<Package> getAllOnRoute(int page, int size){
+        return _packageRepository.findAllByOnWayTrue(PageRequest.of(page, size));
+    }
+
+    public List<Package> getPackagesOnRouteByInoviceId(Long id){
+        return _packageRepository.findAllByInvoiceIdAndOnWayTrue(id);
+    }
 }
