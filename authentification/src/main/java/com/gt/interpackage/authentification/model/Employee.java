@@ -1,58 +1,54 @@
-package com.gt.interpackage.administration.model;
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package com.gt.interpackage.authentification.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+/**
+ *
+ * @author Luis
+ */
 @Entity
 @Table (name = "employee")
-@JsonIgnoreProperties(value={"hibernateLazyInitializer", "handler", "fieldHandler"})
+@JsonIgnoreProperties (value={"hibernateLazyInitializer", "handler", "fieldHandler"})
 public class Employee {
 
     @Id
     private Long CUI;
-
-    @Column(nullable = false, length = 75)
+    
+    @Column (nullable = false, length = 75)
     private String name;
-
+    
     @Column (nullable = false, length = 75)
     private String lastname;
-
+    
     @Column (nullable = false, length = 75)
     private String username;
-
+    
     @Column (nullable = false, length = 200)
     private String email;
-
+    
     @Column (nullable = false)
     private Integer type;
-
+    
     @Column (nullable = true)
     private String tokenPassword;
-
+    
     @Column (nullable = false, length = 60)
+    //@JsonDeserialize (using = BCryptPasswordDeserializer.class)
     private String password;
+    
+    public Employee() { }
 
     @Column (nullable = false)
     private Boolean activo;
-
-    public Employee() { }
-
-    public Employee(Long CUI, String name, String lastname, String username, String email, Integer type, String tokenPassword, String password, Boolean activo) {
-        this.CUI = CUI;
-        this.name = name;
-        this.lastname = lastname;
-        this.username = username;
-        this.email = email;
-        this.type = type;
-        this.tokenPassword = tokenPassword;
-        this.password = password;
-        this.activo = activo;
-    }
-
+    
     public Employee(Long CUI, String name, String lastname, Integer type, String password, String email, String username, Boolean activo) {
         this.CUI = CUI;
         this.name = name;
@@ -73,6 +69,7 @@ public class Employee {
         this.email = email;
         this.activo = activo;
     }
+    
     
     public Long getCUI() {
         return CUI;
@@ -98,6 +95,22 @@ public class Employee {
         this.lastname = lastname;
     }
 
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer employeeType) {
+        this.type = employeeType;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public String getUsername() {
         return username;
     }
@@ -114,12 +127,12 @@ public class Employee {
         this.email = email;
     }
 
-    public Integer getType() {
-        return type;
+    public Boolean getActivo(){
+        return activo;
     }
-
-    public void setType(Integer type) {
-        this.type = type;
+    
+    public void setActivo(Boolean activo){
+        this.activo = activo;
     }
 
     public String getTokenPassword() {
@@ -129,20 +142,5 @@ public class Employee {
     public void setTokenPassword(String tokenPassword) {
         this.tokenPassword = tokenPassword;
     }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public Boolean getActivo() {
-        return activo;
-    }
-
-    public void setActivo(Boolean activo) {
-        this.activo = activo;
-    }
+        
 }
