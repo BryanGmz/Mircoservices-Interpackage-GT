@@ -43,7 +43,7 @@ public class TestAuthService {
     public void testLoginUserNoExist() throws Exception{
         ResponseEntity response = _authService.login("usuario", "12333");
         assertNotNull(response);
-        assertEquals(response.getStatusCode(), HttpStatus.CREATED);
+        assertEquals(response.getStatusCode(), HttpStatus.BAD_REQUEST);
         Mockito.verify(_authRepository).findByUsernameAndPasswordAndActivoTrue("usuario", "12333");
     }
  
