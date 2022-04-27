@@ -6,12 +6,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class EmployeeService {
 
     @Autowired
     private EmployeeRepository employeeRepository;
+
+    @Autowired
+    private EmployeeTypeService employeeTypeService;
 
     public Employee getByCUI(Long CUI) throws Exception {
         try {
@@ -22,5 +27,10 @@ public class EmployeeService {
         } catch(EntityNotFoundException e){
             return null;
         }
+    }
+
+    public Optional<List<Employee>> getAllOperatorsByCUI(String cui){
+        Long operatorTypeId = employeeTypeService.getEmployeeTypeByName("operator").getId();
+        return employeeRepository.findByCuiContainsAndEmployeeTypeIs(cui, Integer.parseInt(operatorTypeId.toString()));
     }
 }
