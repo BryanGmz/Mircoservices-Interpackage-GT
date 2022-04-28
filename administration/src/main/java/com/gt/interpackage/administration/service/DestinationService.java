@@ -100,4 +100,8 @@ public class DestinationService {
         if(this.exists(destination.getName(), destination.getId()))
             throw new BadRequestException("Nombre de destino ya registrado en el sistema");
     }
+
+    public List<Destination> findAll(){
+        return destinationRepository.findAll();
+    }
 }
