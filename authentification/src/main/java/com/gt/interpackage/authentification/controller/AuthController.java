@@ -4,24 +4,23 @@
  */
 package com.gt.interpackage.authentification.controller;
 
-import com.gt.interpackage.authentification.services.AuthService;
+import com.gt.interpackage.authentification.service.AuthService;
 import com.gt.interpackage.authentification.source.Constants;
 import com.gt.interpackage.authentification.utils.JWTUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import com.gt.interpackage.authentification.model.Auth;
 import com.gt.interpackage.authentification.model.Employee;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  *
  * @author Luis
  */
+
+@CrossOrigin(origins = Constants.URL_FRONTEND, allowCredentials = "true")
 @RestController
-@RequestMapping (Constants.API_V1_ADMIN + "/login")
+@RequestMapping (Constants.API_V1_AUTH + "/login")
 public class AuthController {
     
     @Autowired

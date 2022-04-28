@@ -9,10 +9,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import javax.transaction.Transactional;
 import java.util.List;
 
+@CrossOrigin (origins = Constants.URL_FRONTEND, allowCredentials = "true")
 @RestController
 @RequestMapping (Constants.API_V1_ADMIN + "/checkpoint")
 public class CheckpointController {

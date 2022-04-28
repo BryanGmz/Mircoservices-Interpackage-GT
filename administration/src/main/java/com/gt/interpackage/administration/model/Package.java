@@ -1,5 +1,7 @@
 package com.gt.interpackage.administration.model;
 
+import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDate;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,11 +13,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table (name = "package")
+@Table(name = "package")
 public class Package {
 
     @Id
-    @GeneratedValue (strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column (name = "on_way", nullable = false)
@@ -86,29 +88,6 @@ public class Package {
         this.destination = destination;
     }
 
-    public Destination getDestination() {
-        return destination;
-    }
-
-    public void setDestination(Destination destination) {
-        this.destination = destination;
-    }
-    public LocalDate getDateStart() {
-        return dateStart;
-    }
-
-    public void setDateStart(LocalDate dateStart) {
-        this.dateStart = dateStart;
-    }
-
-    public LocalDate getDateEnd() {
-        return dateEnd;
-    }
-
-    public void setDateEnd(LocalDate dateEnd) {
-        this.dateEnd = dateEnd;
-    }
-
     public Long getId() {
         return id;
     }
@@ -173,12 +152,20 @@ public class Package {
         this.description = description;
     }
 
-    public Invoice getInvoice() {
-        return invoice;
+    public LocalDate getDateStart() {
+        return dateStart;
     }
 
-    public void setInvoice(Invoice invoice) {
-        this.invoice = invoice;
+    public void setDateStart(LocalDate dateStart) {
+        this.dateStart = dateStart;
+    }
+
+    public LocalDate getDateEnd() {
+        return dateEnd;
+    }
+
+    public void setDateEnd(LocalDate dateEnd) {
+        this.dateEnd = dateEnd;
     }
 
     public Route getRoute() {
@@ -189,4 +176,19 @@ public class Package {
         this.route = route;
     }
 
+    public Invoice getInvoice() {
+        return invoice;
+    }
+
+    public void setInvoice(Invoice invoice) {
+        this.invoice = invoice;
+    }
+
+    public Destination getDestination() {
+        return destination;
+    }
+
+    public void setDestination(Destination destination) {
+        this.destination = destination;
+    }
 }

@@ -18,6 +18,7 @@ import javax.persistence.PersistenceContext;
 import java.text.ParseException;
 import java.util.List;
 
+@CrossOrigin (origins = Constants.URL_FRONTEND, allowCredentials = "true")
 @RestController
 @RequestMapping(Constants.API_V1_REPORTS + "/route")
 public class RouteController {
@@ -45,7 +46,6 @@ public class RouteController {
      * @param size Tamaño de la pagina. Por defecto 10.
      * @return
      */
-    @CrossOrigin
     @GetMapping("list")
     public ResponseEntity<Page<Route>> getRoutes(
             @RequestParam(defaultValue = "1") int page,
@@ -73,7 +73,7 @@ public class RouteController {
             Page<Route> routes = routeService.getRoutesByActive(
                     PageRequest.of(page, size, Sort.by("name")), active
             );
-            return new ResponseEntity<Page<Route>>(routes, HttpStatus.OK);
+            return new ResponseEntity<>(routes, HttpStatus.OK);
         } catch (Exception e) {
             return ResponseEntity
                     .internalServerError()

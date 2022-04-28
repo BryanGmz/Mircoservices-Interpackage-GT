@@ -6,6 +6,10 @@ import com.gt.interpackage.administration.model.Package;
 import java.io.Serializable;
 import java.util.Objects;
 
+/**
+ *
+ * @author bryan
+ */
 
 public class PKPackageCheckpoint implements Serializable {
 

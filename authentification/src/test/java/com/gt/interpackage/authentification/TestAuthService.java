@@ -7,7 +7,7 @@ package com.gt.interpackage.authentification;
 import com.gt.interpackage.authentification.model.Auth;
 import com.gt.interpackage.authentification.model.Employee;
 import com.gt.interpackage.authentification.repository.AuthRepository;
-import com.gt.interpackage.authentification.services.AuthService;
+import com.gt.interpackage.authentification.service.AuthService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -43,7 +43,7 @@ public class TestAuthService {
     public void testLoginUserNoExist() throws Exception{
         ResponseEntity response = _authService.login("usuario", "12333");
         assertNotNull(response);
-        assertEquals(response.getStatusCode(), HttpStatus.CREATED);
+        assertEquals(response.getStatusCode(), HttpStatus.BAD_REQUEST);
         Mockito.verify(_authRepository).findByUsernameAndPasswordAndActivoTrue("usuario", "12333");
     }
  

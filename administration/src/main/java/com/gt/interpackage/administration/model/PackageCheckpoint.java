@@ -2,6 +2,7 @@ package com.gt.interpackage.administration.model;
 
 import com.gt.interpackage.administration.pk.PKPackageCheckpoint;
 
+import javax.persistence.*;
 import java.sql.Date;
 import java.sql.Time;
 import javax.persistence.Column;
@@ -14,8 +15,8 @@ import javax.persistence.Table;
 
 
 @Entity
-@Table (name = "package_checkpoint")
-@IdClass (value = PKPackageCheckpoint.class)
+@Table(name = "package_checkpoint")
+@IdClass(value = PKPackageCheckpoint.class)
 public class PackageCheckpoint {
 
     @Id

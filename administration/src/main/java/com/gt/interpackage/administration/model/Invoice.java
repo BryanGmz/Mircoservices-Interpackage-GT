@@ -1,5 +1,8 @@
 package com.gt.interpackage.administration.model;
 
+
+import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDate;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,11 +12,11 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table (name = "invoice")
+@Table(name = "invoice")
 public class Invoice {
 
     @Id
-    @GeneratedValue (strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column (nullable = false, name ="date_emit")
@@ -71,5 +74,4 @@ public class Invoice {
     public void setNit(Integer nit) {
         this.nit = nit;
     }
-
 }
