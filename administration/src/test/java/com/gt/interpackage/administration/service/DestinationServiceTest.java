@@ -9,6 +9,9 @@ import org.mockito.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import java.util.Arrays;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class DestinationServiceTest {
@@ -94,5 +97,16 @@ public class DestinationServiceTest {
         assertNotNull(responseEntity);
         assertEquals(responseEntity.getStatusCode(), HttpStatus.BAD_REQUEST);
         Mockito.verify(destinationRepository).existsDestinationByName(ArgumentMatchers.any(String.class));
+    }
+
+    @Test
+    public void testFindAllDestination() {
+        Mockito.when(
+                destinationRepository.findAll())
+                .thenReturn(Arrays.asList(destination));
+        List<Destination> list = destinationService.findAll();
+        assertNotNull(list);
+        assertEquals(list.size(), 1);
+        Mockito.verify(destinationRepository).findAll();
     }
 }
