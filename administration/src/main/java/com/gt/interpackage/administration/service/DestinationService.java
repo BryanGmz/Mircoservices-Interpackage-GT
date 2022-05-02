@@ -24,6 +24,10 @@ public class DestinationService {
 
     @Autowired
     private RouteService routeService;
+    
+    public List<Destination> findAll(){
+        return destinationRepository.findAll();
+    }
 
     public <S extends Destination> S save (S entity) {
         if (destinationRepository.existsDestinationByName(entity.getName())) return null;

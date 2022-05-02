@@ -34,6 +34,7 @@ import org.springframework.data.domain.Page;
  *
  * @author Luis
  */
+@CrossOrigin (origins = Constants.URL_FRONTEND, allowCredentials = "true")
 @RestController
 @RequestMapping (Constants.API_V1_ADMIN + "/employee")
 public class EmployeeController {

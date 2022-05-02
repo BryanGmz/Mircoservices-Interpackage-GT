@@ -28,11 +28,7 @@ public class PackageService {
      * los datos del paquete que se recibe como parametro
     */
     public Package getById(Long id){
-        try {
-            return _packageRepository.getById(id);
-        } catch(EntityNotFoundException e){
-            return null;
-        }
+        return _packageRepository.getById(id);
     }
     
 //    /*

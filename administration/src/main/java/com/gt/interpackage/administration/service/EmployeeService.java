@@ -30,7 +30,7 @@ public class EmployeeService {
     }
     
     public List<Employee> findAllActivates(){
-        return employeeRepository.findAll();
+        return employeeRepository.getAllActivates();
     }
     
     public List<Employee> findAllDeactivates(){
@@ -42,11 +42,7 @@ public class EmployeeService {
     }
     
     public <S extends Employee> S save(S entity){
-        try {
-            return employeeRepository.save(entity);
-        } catch(Exception e){
-            return null;
-        }
+        return employeeRepository.save(entity);
     }
     
     
@@ -101,14 +97,10 @@ public class EmployeeService {
     
 
     public Employee getByCUI(Long CUI) throws Exception {
-        try {
-            Employee employee = employeeRepository.getById(CUI);
-            if (employee == null) return null;
-            if(employee.getName() != null){ }
-            return employee;
-        } catch(EntityNotFoundException e){
-            return null;
-        }
+        Employee employee = employeeRepository.getById(CUI);
+        if (employee == null) return null;
+        if(employee.getName() != null){ }
+        return employee;
     }
 
     public Optional<List<Employee>> getAllOperatorsByCUI(String cui){
