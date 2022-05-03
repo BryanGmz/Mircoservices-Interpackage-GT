@@ -24,7 +24,6 @@ public class QueueService {
         } catch (Exception exception) {
             return false;
         }
-
     }
 
     public <S extends Queue> S save(S entity){
