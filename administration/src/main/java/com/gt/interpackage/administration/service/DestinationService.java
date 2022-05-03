@@ -24,6 +24,10 @@ public class DestinationService {
 
     @Autowired
     private RouteService routeService;
+    
+    public List<Destination> findAll(){
+        return destinationRepository.findAll();
+    }
 
     public <S extends Destination> S save (S entity) {
         if (destinationRepository.existsDestinationByName(entity.getName())) return null;
@@ -101,7 +105,4 @@ public class DestinationService {
             throw new BadRequestException("Nombre de destino ya registrado en el sistema");
     }
 
-    public List<Destination> findAll(){
-        return destinationRepository.findAll();
-    }
 }

@@ -40,7 +40,7 @@ public class EmployeeServiceTest {
     
     @Test
     public void testFindAll(){
-        //Falta
+
     }
     
     @Test
@@ -57,18 +57,18 @@ public class EmployeeServiceTest {
     public void testFindDeactivates(){
         Mockito.when(
                 _empRepository.getAllDeactivates())
-                .thenReturn(_empService.findAllDeactivates());
+                .thenReturn(Arrays.asList(emp));
         assertNotNull(_empService.findAllDeactivates());
-        assertNotEquals(_empService.findAllDeactivates().size(), 1);
+        assertEquals(_empService.findAllDeactivates().size(), 1);
     }
     
     @Test
     public void testFindAllActivatesNotAdmin(){
         Mockito.when(
                 _empRepository.getAllActivatesNotAdmin())
-                .thenReturn(_empService.findAllActivatesNotAdmin());
+                .thenReturn(Arrays.asList(emp));
         assertNotNull(_empService.findAllActivatesNotAdmin());
-        assertNotEquals(_empService.findAllActivatesNotAdmin().size(), 1);
+        assertEquals(_empService.findAllActivatesNotAdmin().size(), 1);
     }
     
     @Test
@@ -76,9 +76,9 @@ public class EmployeeServiceTest {
         Mockito.when(
                 _empRepository.save(ArgumentMatchers.any(Employee.class)))
                 .thenReturn(emp);
-        Employee empSaved = _empService.save(new Employee("Usuario", "Prueba", 1, "123453678", "prueba2@gmail.com", "userPrueba123", true));
+        Employee empSaved = _empService.save(new Employee("Jose Manuel", "Garcia", 1, "12345678", "prueba@gmail.com", "josema12", true));
         assertNotNull(empSaved);
-        assertEquals(empSaved.getUsername(), "userPrueba123");
+        assertEquals(empSaved.getUsername(), "josema12");
         Mockito.verify(_empRepository).save(ArgumentMatchers.any(Employee.class));
     }
     
@@ -98,6 +98,31 @@ public class EmployeeServiceTest {
         Mockito.verify(_empRepository).getById(ArgumentMatchers.any(Long.class));        
     }
     
+    @Test
+    public void testUpdatedNotFoundEmployee() throws Exception {
+        Employee updated = new Employee(555L, "Usuario", "Actualizado", 1, "12345678", "prueba@gmail.com", "userUpdated123", true);
+        Mockito.when(
+                _empRepository.getById(ArgumentMatchers.any(Long.class)))
+                .thenReturn(null);
+        Mockito.when(
+                _empRepository.save(ArgumentMatchers.any(Employee.class)))
+                .thenReturn(new Employee(555L, "Usuario", "Actualizado", 1, "12345678", "prueba@gmail.com", "userUpdated123", true));
+        Employee empUpdated = _empService.update2(updated, 555L);
+        assertNull(empUpdated);
+        assertEquals(empUpdated, null);
+    }
+    
+    @Test
+    public void testMethodUpdate() throws Exception {
+        Employee updated = new Employee("Luis Fernando", "Marquez", 1, "12345678", "prueba@gmail.com", "josema12", true);
+        Mockito.when(
+                _empService.getByCUI(ArgumentMatchers.any(Long.class)))
+                .thenReturn(emp);
+        ResponseEntity response = _empService.update(updated, 555L);
+        assertNotNull(response);
+        assertEquals(response.getStatusCode(), HttpStatus.OK);
+    }
+    
     @Test 
     public void testCreateEmployee(){
         //Falta
@@ -108,6 +133,9 @@ public class EmployeeServiceTest {
         Mockito.when(
                 _empRepository.getById(ArgumentMatchers.any(Long.class)))
                 .thenReturn(emp);
+        Mockito.when(
+                _empRepository.existsEmployeeByUsername(ArgumentMatchers.any(String.class)))
+                .thenReturn(true);
         boolean exist = _empService.exists("josema12");
         assertNotNull(exist);
         assertEquals(exist, true);
@@ -119,6 +147,9 @@ public class EmployeeServiceTest {
         Mockito.when(
                 _empRepository.getById(ArgumentMatchers.any(Long.class)))
                 .thenReturn(emp);
+        Mockito.when(
+                _empRepository.existsEmployeeByCUI(ArgumentMatchers.any(Long.class)))
+                .thenReturn(true);
         boolean exist = _empService.existsByCUI(12355L);
         assertNotNull(exist);
         assertEquals(exist, true);
@@ -137,18 +168,39 @@ public class EmployeeServiceTest {
         Mockito.verify(_empRepository).getById(ArgumentMatchers.any(Long.class));
     }
     
+ 
+    
     @Test
-    public void testCreateEmployeeExists(){
+    public void testCreateEmployeeCUIExists(){
         Mockito.when(
                 _empRepository.save(ArgumentMatchers.any(Employee.class)))
                 .thenReturn(emp);
+        Mockito.when(
+                _empService.existsByCUI(ArgumentMatchers.any(Long.class)))
+                .thenReturn(true);
         ResponseEntity responseEntity = _empService.createEmployee(emp);
         assertNotNull(responseEntity);
-        assertEquals(responseEntity.getStatusCode(), HttpStatus.INTERNAL_SERVER_ERROR);
+        assertEquals(responseEntity.getStatusCode(), HttpStatus.BAD_REQUEST);
+    }
+    
+    @Test
+    public void testCreateEmployeeUsernameExists(){
+        Mockito.when(
+                _empRepository.save(ArgumentMatchers.any(Employee.class)))
+                .thenReturn(emp);
+        Mockito.when(
+                _empService.exists(ArgumentMatchers.any(String.class)))
+                .thenReturn(true);
+        ResponseEntity response = _empService.createEmployee(emp);
+        assertNotNull(response);
+        assertEquals(response.getStatusCode(), HttpStatus.BAD_REQUEST);
     }
     
     @Test
     public void testCreateEmployeeSuccesfully(){
+        Mockito.when(
+                _empRepository.save(ArgumentMatchers.any(Employee.class)))
+                .thenReturn(emp);
         ResponseEntity responseEntity = _empService.createEmployee(emp);
         assertNotNull(responseEntity);
         assertEquals(responseEntity.getStatusCode(), HttpStatus.CREATED);

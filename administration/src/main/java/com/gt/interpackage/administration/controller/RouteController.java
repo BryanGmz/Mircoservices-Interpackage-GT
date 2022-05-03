@@ -98,4 +98,9 @@ public class RouteController {
             return new ResponseEntity("Error en el servidor.\n" + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+    
+    @GetMapping("/destination/{id_destination}")
+    public ResponseEntity<List<Route>> getRoutesByDestination(@PathVariable Integer id_destination){
+        return ResponseEntity.ok(routeService.findRouteByDestination(id_destination));
+    }
 }

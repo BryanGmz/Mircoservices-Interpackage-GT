@@ -20,6 +20,12 @@ public class DestinationController {
     @Autowired
     private DestinationService destinationService;
 
+    @GetMapping("/")
+    public ResponseEntity<List<Destination>> getAllDestinations(){
+        return ResponseEntity.ok(destinationService.findAll());
+    }
+    
+    
     @PostMapping("/")
     public ResponseEntity<Destination> addDestination(@RequestBody Destination destination) {
         try {

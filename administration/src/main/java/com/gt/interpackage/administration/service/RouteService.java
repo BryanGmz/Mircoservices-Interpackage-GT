@@ -99,5 +99,9 @@ public class RouteService {
         if(route.getPackagesOnRoute() > 0)
             throw new BadRequestException("No se pueden realizar acciones sobre una ruta que contiene paquetes en ruta.");
     }
+    
+    public List<Route> findRouteByDestination(Integer id_destination){
+        return routeRepository.findRouteByDestination(id_destination);
+    }
 
 }
