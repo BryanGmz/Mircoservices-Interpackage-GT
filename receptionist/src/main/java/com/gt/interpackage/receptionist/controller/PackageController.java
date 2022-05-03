@@ -11,6 +11,7 @@ import java.net.URI;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -61,5 +62,38 @@ public class PackageController {
     @GetMapping("/invoice/{id_invoice}")
     public ResponseEntity<List<Package>> getPackagesByInvoice(@PathVariable Long id_invoice){
         return ResponseEntity.ok(_packageService.getPackagesByInvoice(id_invoice));
+    }
+
+    @GetMapping("/in-destination/")
+    public ResponseEntity<Page<Package>> getInDestination(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size
+    ){
+        try{
+            return new ResponseEntity<>(_packageService.getAllAtDestination(page, size), HttpStatus.OK);
+        } catch(Exception e){
+            return new ResponseEntity("Error en el servidor.\n" + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/on-route")
+    public ResponseEntity<Page<Package>> getOnRoute(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size
+    ){
+        try{
+            return new ResponseEntity<>(_packageService.getAllOnRoute(page, size), HttpStatus.OK);
+        } catch(Exception e){
+            return new ResponseEntity("Error en el servidor.\n" + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("trace-by-invoice/{id}")
+    public ResponseEntity<List<Package>> getPackagesOnRouteByInvoiceId(@PathVariable Long id){
+        try{
+            return ResponseEntity.ok(_packageService.getPackagesOnRouteByInoviceId(id));
+        } catch(Exception e){
+            return new ResponseEntity("Error en el servidor.\n" + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }

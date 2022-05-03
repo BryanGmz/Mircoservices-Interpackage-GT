@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class OperatorApplication {
 
 	public static void main(String[] args) {
+
 		SpringApplication.run(OperatorApplication.class, args);
 	}
 
