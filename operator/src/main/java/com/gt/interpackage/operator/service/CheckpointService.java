@@ -30,7 +30,4 @@ public class CheckpointService {
         return checkpoint.get();
     }
 
-    public List<Checkpoint> getAllCheckpointsByDestinationId(Long idDestination) {
-        return checkpointRepository.findAllByRoute_Destination_IdAndRoute_ActiveAndActiveOrderById(idDestination, true, true);
-    }
 }

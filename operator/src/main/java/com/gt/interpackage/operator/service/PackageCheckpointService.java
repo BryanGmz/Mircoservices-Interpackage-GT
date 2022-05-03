@@ -1,7 +1,6 @@
 package com.gt.interpackage.operator.service;
 
 import com.gt.interpackage.administration.source.BadRequestException;
-import com.gt.interpackage.operator.handlers.QueueHandler;
 import com.gt.interpackage.operator.model.Checkpoint;
 import com.gt.interpackage.operator.model.Package;
 import com.gt.interpackage.operator.model.PackageCheckpoint;
@@ -25,9 +24,6 @@ public class PackageCheckpointService {
 
     @Autowired
     private RouteService routeService;
-
-    @Autowired
-    private QueueHandler queueHandler;
 
     public List<PackageCheckpoint> getAllPackageCheckpointOnCheckpoint(Long id){
         return packageCheckpointRepository.findAllByCheckpointIdAndCurrentCheckpointTrue(id);
@@ -143,8 +139,6 @@ public class PackageCheckpointService {
                 tempPackageCheckpoint.getCheckpoint().getRoute().setPackagesOnRoute(tempPackageCheckpoint.getCheckpoint().getRoute().getPackagesOnRoute()-1);
                 routeService.update(tempPackageCheckpoint.getCheckpoint().getRoute());
             }
-
-            queueHandler.verifiyQueue(this);
     }
 
 }
