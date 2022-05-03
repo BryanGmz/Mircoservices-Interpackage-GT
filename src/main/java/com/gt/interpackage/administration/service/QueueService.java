@@ -3,9 +3,11 @@ package com.gt.interpackage.administration.service;
 import com.gt.interpackage.administration.model.Queue;
 import com.gt.interpackage.administration.repository.QueueRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class QueueService {
 
     @Autowired
@@ -15,8 +17,13 @@ public class QueueService {
         return queueRepository.findAllByPackages_Destination_Id(idDestination);
     }
 
-    public void deletePackageOnQueue(Queue queue) {
-        queueRepository.delete(queue);
+    public boolean deletePackageOnQueue(Queue queue) {
+        try {
+            queueRepository.delete(queue);
+            return true;
+        } catch (Exception exception) {
+            return false;
+        }
     }
 
     public <S extends Queue> S save(S entity){

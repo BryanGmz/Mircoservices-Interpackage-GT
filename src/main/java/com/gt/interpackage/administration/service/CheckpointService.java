@@ -135,4 +135,8 @@ public class CheckpointService {
             throw new BadRequestException("El punto de control no existe en el sistema.");
         return checkpoint.get();
     }
+
+    public List<Checkpoint> getAllCheckpointsByDestinationId(Long idDestination) {
+        return checkpointRepository.findAllByRoute_Destination_IdAndRoute_ActiveAndActiveOrderById(idDestination, true, true);
+    }
 }

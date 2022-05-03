@@ -40,8 +40,13 @@ public class RouteService {
         updatedRoute.setName(route.getName());
         updatedRoute.setActive(route.getActive());
         updatedRoute.setDestination(route.getDestination());
+        return routeRepository.save(updatedRoute);
+    }
+
+    public Route save(Route route){
         return routeRepository.save(route);
     }
+
 
     public void delete(Long id, CheckpointService checkpointService) throws BadRequestException{
         Route tempRoute = this.getRouteById(id);

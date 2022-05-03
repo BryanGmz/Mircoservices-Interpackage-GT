@@ -9,6 +9,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -275,5 +278,15 @@ public class CheckpointServiceTest {
         Mockito.verify(checkpointRepository).getById(ArgumentMatchers.any(Long.class));
         Mockito.verify(routeService).existsById(ArgumentMatchers.any(Long.class));
         Mockito.verify(checkpointRepository).save(ArgumentMatchers.any(Checkpoint.class));
+    }
+
+    @Test
+    public void testGetAllCheckpointsByDestinationId() {
+        Mockito.when(
+                checkpointRepository.findAllByRoute_Destination_IdAndRoute_ActiveAndActiveOrderById(ArgumentMatchers.any(Long.class), ArgumentMatchers.any(Boolean.class), ArgumentMatchers.any(Boolean.class)))
+                .thenReturn(Arrays.asList(checkpoint));
+        List<Checkpoint> list = checkpointService.getAllCheckpointsByDestinationId(1L);
+        assertNotNull(list);
+        assertEquals(list.size(), 1);
     }
 }

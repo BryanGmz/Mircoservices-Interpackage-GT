@@ -1,6 +1,5 @@
 package com.gt.interpackage.administration.service;
 
-import com.gt.interpackage.administration.service.DestinationService;
 import com.gt.interpackage.administration.model.Destination;
 import com.gt.interpackage.administration.repository.DestinationRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -105,5 +104,16 @@ public class DestinationServiceTest {
         assertNotNull(responseEntity);
         assertEquals(responseEntity.getStatusCode(), HttpStatus.BAD_REQUEST);
         Mockito.verify(destinationRepository).existsDestinationByName(ArgumentMatchers.any(String.class));
+    }
+
+    @Test
+    public void testFindAllDestination() {
+        Mockito.when(
+                destinationRepository.findAll())
+                .thenReturn(Arrays.asList(destination));
+        List<Destination> list = destinationService.findAll();
+        assertNotNull(list);
+        assertEquals(list.size(), 1);
+        Mockito.verify(destinationRepository).findAll();
     }
 }
