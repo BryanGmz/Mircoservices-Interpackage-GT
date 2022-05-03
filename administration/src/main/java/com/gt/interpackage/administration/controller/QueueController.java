@@ -18,7 +18,7 @@ public class QueueController {
     @Autowired
     private QueueHandler queueHandler;
 
-    @GetMapping
+    @GetMapping("/")
     public ResponseEntity<?> prueba(){
         try {
             queueHandler.traverseQueue();
