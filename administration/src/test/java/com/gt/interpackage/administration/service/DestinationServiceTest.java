@@ -8,10 +8,8 @@ import org.junit.jupiter.api.Test;
 import org.mockito.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-
 import java.util.Arrays;
 import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 public class DestinationServiceTest {
@@ -28,6 +26,16 @@ public class DestinationServiceTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         destination = new Destination(1L, "GT-Xela", "De Guate a Xela", 15.50);
+    }
+    
+    @Test
+    public void testFindAll(){
+        Mockito.when(
+                destinationRepository.findAll())
+                .thenReturn(Arrays.asList(destination));
+        List<Destination> list = destinationService.findAll();
+        assertNotNull(list);
+        assertEquals(list.size(), 1);
     }
 
     @Test

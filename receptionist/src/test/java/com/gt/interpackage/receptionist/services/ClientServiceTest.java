@@ -71,6 +71,9 @@ public class ClientServiceTest {
         Mockito.when(
                 _clientRepository.getById(ArgumentMatchers.any(Long.class)))
                 .thenReturn(client);
+        Mockito.when(
+                _clientRepository.existsClientByCui(ArgumentMatchers.any(Long.class)))
+                .thenReturn(true);
         boolean exist = _clientService.existsByCui(1888L);
         assertNotNull(exist);
         assertEquals(exist, true);
@@ -82,6 +85,9 @@ public class ClientServiceTest {
         Mockito.when(
                 _clientRepository.getById(ArgumentMatchers.any(Long.class)))
                 .thenReturn(client);
+        Mockito.when(
+                _clientRepository.existsClientByNit(ArgumentMatchers.any(Integer.class)))
+                .thenReturn(true);
         boolean exist = _clientService.existsByNit(5555);
         assertNotNull(exist);
         assertEquals(exist, true);
@@ -89,10 +95,37 @@ public class ClientServiceTest {
     }
     
     @Test
-    public void testCreateClientExists() {
+    public void testCreateClientException() throws Exception {
+        Mockito.when(
+            _clientService.existsByCui(ArgumentMatchers.any(Long.class)))
+                .thenThrow(new Exception());
+        ResponseEntity responseEntity = _clientService.createClient(client);
+        assertNotNull(responseEntity);
+        assertEquals(responseEntity.getStatusCode(), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+    
+    
+    @Test
+    public void testCreateClientCUIExists() throws Exception {
         Mockito.when(
                 _clientRepository.save(ArgumentMatchers.any(Client.class)))
                 .thenReturn(client);
+        Mockito.when(
+                _clientService.existsByCui(ArgumentMatchers.any(Long.class)))
+                .thenReturn(true);
+        ResponseEntity responseEntity = _clientService.createClient(client);
+        assertNotNull(responseEntity);
+        assertEquals(responseEntity.getStatusCode(), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+    
+    @Test
+    public void testCreateClientNITExists() throws Exception{
+        Mockito.when(
+                _clientRepository.save(ArgumentMatchers.any(Client.class)))
+                .thenReturn(client);
+        Mockito.when(
+                _clientService.existsByNit(ArgumentMatchers.any(Integer.class)))
+                .thenReturn(true);
         ResponseEntity responseEntity = _clientService.createClient(client);
         assertNotNull(responseEntity);
         assertEquals(responseEntity.getStatusCode(), HttpStatus.INTERNAL_SERVER_ERROR);
@@ -100,6 +133,9 @@ public class ClientServiceTest {
     
     @Test
     public void testCreateClientSuccesfully(){
+        Mockito.when(
+                _clientRepository.save(ArgumentMatchers.any(Client.class)))
+                .thenReturn(client);
         ResponseEntity responseEntity = _clientService.createClient(client);
         assertNotNull(responseEntity);
         assertEquals(responseEntity.getStatusCode(), HttpStatus.CREATED);

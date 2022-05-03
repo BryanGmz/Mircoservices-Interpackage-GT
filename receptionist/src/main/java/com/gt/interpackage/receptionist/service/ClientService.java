@@ -33,12 +33,8 @@ public class ClientService {
     }
     
     public Client getByNit(Integer nit) throws Exception{
-        try {
-            Client client = _clientRepository.findByNit(nit);
-            return client;
-        } catch(EntityNotFoundException e){
-            return null;
-        }
+        Client client = _clientRepository.findByNit(nit);
+        return client;
     }
     
     
@@ -58,11 +54,11 @@ public class ClientService {
         }
     }
     
-    public boolean existsByCui(Long cui){
+    public boolean existsByCui(Long cui) throws Exception {
         return _clientRepository.existsClientByCui(cui);
     }
     
-    public boolean existsByNit(Integer nit){
+    public boolean existsByNit(Integer nit) throws Exception {
         return _clientRepository.existsClientByNit(nit);
     }
     

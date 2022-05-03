@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
+import org.springframework.data.jpa.repository.Query;
 
 @Repository
 public interface RouteRepository extends JpaRepository<Route, Long> {
@@ -17,5 +18,8 @@ public interface RouteRepository extends JpaRepository<Route, Long> {
     public boolean existsRouteByNameAndIdIsNot(String name, Long id);
 
     public boolean existsRouteByDestinationId(Long destinationId);
+    
+    @Query(value = "SELECT * FROM route r WHERE r.id_destination =?1", nativeQuery = true)
+    List<Route> findRouteByDestination(Integer id_destination);
 
 }
