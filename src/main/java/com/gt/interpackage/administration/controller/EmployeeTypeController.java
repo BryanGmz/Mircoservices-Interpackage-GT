@@ -25,5 +25,6 @@ public class EmployeeTypeController {
         employeeTypeService.create( new EmployeeType(1L, "administrator", "Administrador"));
         employeeTypeService.create( new EmployeeType(2L, "operator", "Operador"));
         employeeTypeService.create( new EmployeeType(3L, "receptionist", "Recepcionista"));
+        employeeTypeService.create( new EmployeeType(4L, "hola", "nomaspaver"));
     }
 }
