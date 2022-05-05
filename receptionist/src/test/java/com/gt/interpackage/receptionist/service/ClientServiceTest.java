@@ -2,20 +2,17 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.gt.interpackage.receptionist.services;
+package com.gt.interpackage.receptionist.service;
 
 import com.gt.interpackage.receptionist.model.Client;
-import com.gt.interpackage.receptionist.service.ClientService;
 import com.gt.interpackage.receptionist.repository.ClientRepository;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.ArgumentMatcher;
 import org.mockito.ArgumentMatchers;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.assertj.core.api.Assertions;
 import org.mockito.MockitoAnnotations;
 import java.util.Arrays;
 import static org.junit.jupiter.api.Assertions.*;
@@ -94,15 +91,7 @@ public class ClientServiceTest {
         Mockito.verify(_clientRepository).existsClientByNit(ArgumentMatchers.any(Integer.class));
     }
     
-    @Test
-    public void testCreateClientException() throws Exception {
-        Mockito.when(
-            _clientService.existsByCui(ArgumentMatchers.any(Long.class)))
-                .thenThrow(new Exception());
-        ResponseEntity responseEntity = _clientService.createClient(client);
-        assertNotNull(responseEntity);
-        assertEquals(responseEntity.getStatusCode(), HttpStatus.INTERNAL_SERVER_ERROR);
-    }
+
     
     
     @Test

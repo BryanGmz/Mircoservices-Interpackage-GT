@@ -2,10 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.gt.interpackage.receptionist.services;
+package com.gt.interpackage.receptionist.service;
 
 import com.gt.interpackage.receptionist.model.Package;
-import com.gt.interpackage.receptionist.service.PackageService;
 import com.gt.interpackage.receptionist.repository.PackageRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,6 +15,7 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import java.util.Arrays;
 import java.util.List;
+
 import org.assertj.core.api.Assertions;
 import static org.junit.jupiter.api.Assertions.*;
 /**
@@ -77,6 +77,15 @@ public class PackageServiceTest {
         Mockito.when(_packageRepository.getPackagesByInvoice(ArgumentMatchers.any(Long.class)))
                 .thenReturn(Arrays.asList(pack));
         assertNotNull(_packageService.getPackagesByInvoice(1L));
+    }
+
+    @Test
+    public void testGetPackagesOnRouteByInoviceId(){
+        Mockito.doReturn(Arrays.asList(pack)).when(_packageRepository).findAllByInvoiceIdAndOnWayTrue(1L);
+        List<Package> list = _packageService.getPackagesOnRouteByInoviceId(1L);
+        assertEquals(1, list.size());
+        assertEquals(pack.getId(), list.get(0).getId());
+
     }
     
     
