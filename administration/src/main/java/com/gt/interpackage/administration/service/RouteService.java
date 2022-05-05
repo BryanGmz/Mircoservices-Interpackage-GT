@@ -18,12 +18,7 @@ public class RouteService {
     @Autowired
     private RouteRepository routeRepository;
 
-    /**
-     * Metodo que llama al repositorio de rutas para consultar si existe una
-     * ruta cuyo id sea el  parametro que se recibe.
-     * @param id
-     * @return True o False.
-     */
+
     public boolean existsById(Long id){
         return routeRepository.existsById(id);
     }
@@ -84,18 +79,17 @@ public class RouteService {
         return routeRepository.existsRouteByDestinationId(destinationId);
     }
 
-    private void validateRouteData(Route route, DestinationService destinationService) throws BadRequestException{
+    public void validateRouteData(Route route, DestinationService destinationService) throws BadRequestException{
         if(route.getName().isBlank() || route.getName().isEmpty())
             throw new BadRequestException("Nombre de ruta no valido");
 
         if(this.existsAndIdIsNot(route.getName(), route.getId()))
             throw new BadRequestException("Nombre de ruta ya registrado en el sistema");
 
-        if(destinationService.getDestinationById(route.getDestination().getId()) == null)
-            throw new BadRequestException("El destino indicado no existe en el sistema");
+        destinationService.getDestinationById(route.getDestination().getId());
     }
 
-    private void validateNoPackagesOnRoute(Route route) throws BadRequestException{
+    public void validateNoPackagesOnRoute(Route route) throws BadRequestException{
         if(route.getPackagesOnRoute() > 0)
             throw new BadRequestException("No se pueden realizar acciones sobre una ruta que contiene paquetes en ruta.");
     }

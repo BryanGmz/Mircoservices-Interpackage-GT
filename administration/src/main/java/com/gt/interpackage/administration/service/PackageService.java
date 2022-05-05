@@ -13,10 +13,6 @@ public class PackageService {
     @Autowired
     private PackageRepository packageRepository;
 
-    /*
-     * Metodo que llama al repositorio de paquetes para obtener
-     * los datos del paquete que se recibe como parametro
-     */
     public Package getById(Long id)   {
         try {
             return  packageRepository.getById(id);
@@ -25,10 +21,6 @@ public class PackageService {
         }
     }
 
-    /*
-     * Metodo que llama al repositorio de paquetes para actualizar
-     * un paquete especifico
-     */
     public <S extends Package> Package update(S entity, Long id) throws Exception {
         Package pack = getById(id);
         if(pack != null) {

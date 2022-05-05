@@ -97,7 +97,7 @@ public class DestinationService {
         return destinationRepository.existsDestinationByNameAndIdIsNot(name, id);
     }
 
-    private void validateDestinationName(Destination destination) throws BadRequestException{
+    public void validateDestinationName(Destination destination) throws BadRequestException{
         if(destination.getName().isBlank() || destination.getName().isEmpty() )
             throw new BadRequestException("Nombre de destino no valido");
 

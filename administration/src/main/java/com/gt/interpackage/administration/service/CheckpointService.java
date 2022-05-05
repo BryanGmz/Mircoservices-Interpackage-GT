@@ -112,6 +112,7 @@ public class CheckpointService {
         return this.execute(checkpoint, 0, 0L, false);
 
     }
+
     public void delete(Long id) throws BadRequestException{
         Checkpoint tempCheckpoint = this.getCheckpointById2(id);
 
@@ -120,7 +121,6 @@ public class CheckpointService {
 
         if(packageCheckpointService.existsAnyRegisterOfCheckpointById(id))
             throw new BadRequestException("No se puede eliminar el punto de control debido a que se han registrado paquetes en el mismo anteriormente. Consulte al DBA.");
-
         checkpointRepository.delete(tempCheckpoint);
     }
 

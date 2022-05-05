@@ -4,15 +4,22 @@
  */
 package com.gt.interpackage.administration.service;
 
+import com.gt.interpackage.administration.model.EmployeeType;
 import com.gt.interpackage.administration.repository.EmployeeRepository;
 import com.gt.interpackage.administration.model.Employee;
+import com.gt.interpackage.administration.repository.EmployeeTypeRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+
+import java.lang.reflect.Array;
 import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+
 import org.junit.jupiter.api.Assertions;
 import static org.junit.jupiter.api.Assertions.*;
 import org.mockito.ArgumentMatchers;
@@ -26,9 +33,16 @@ public class EmployeeServiceTest {
 
     @Mock
     private EmployeeRepository _empRepository;
+
+    @Mock
+    private EmployeeTypeRepository employeeTypeRepository;
     
     @InjectMocks
     private EmployeeService _empService;
+
+    @InjectMocks
+    private EmployeeTypeService employeeTypeService;
+
     
     private Employee emp;
     
@@ -206,4 +220,5 @@ public class EmployeeServiceTest {
         assertEquals(responseEntity.getStatusCode(), HttpStatus.CREATED);
         Mockito.verify(_empRepository).save(ArgumentMatchers.any(Employee.class));
     }
+
 }
