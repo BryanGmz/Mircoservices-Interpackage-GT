@@ -1,9 +1,12 @@
 package com.gt.interpackage.administration.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 
 @Entity
 @Table (name = "checkpoint")
+@JsonIgnoreProperties(value={"hibernateLazyInitializer", "handler", "fieldHandler"})
 public class Checkpoint {
 
     @Id
