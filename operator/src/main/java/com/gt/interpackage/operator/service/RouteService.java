@@ -22,7 +22,6 @@ public class RouteService {
     public Route update(Route route) throws BadRequestException{
         this.validateRouteData(route);
         Route updatedRoute = this.getRouteById(route.getId());
-        this.validateNoPackagesOnRoute(updatedRoute);
         updatedRoute.setName(route.getName());
         updatedRoute.setActive(route.getActive());
         updatedRoute.setDestination(route.getDestination());
@@ -39,11 +38,6 @@ public class RouteService {
 
         if(this.existsAndIdIsNot(route.getName(), route.getId()))
             throw new BadRequestException("Nombre de ruta ya registrado en el sistema");
-    }
-
-    private void validateNoPackagesOnRoute(Route route) throws BadRequestException{
-        if(route.getPackagesOnRoute() > 0)
-            throw new BadRequestException("No se pueden realizar acciones sobre una ruta que contiene paquetes en ruta.");
     }
 
     public Route getRouteById(Long id) throws BadRequestException{
