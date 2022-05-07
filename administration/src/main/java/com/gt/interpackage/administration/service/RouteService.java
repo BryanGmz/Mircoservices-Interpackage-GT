@@ -41,7 +41,7 @@ public class RouteService {
     public Route save(Route route){
         return routeRepository.save(route);
     }
-    
+
     public void delete(Long id, CheckpointService checkpointService) throws BadRequestException{
         Route tempRoute = this.getRouteById(id);
 

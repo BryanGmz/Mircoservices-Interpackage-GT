@@ -217,6 +217,7 @@ public class EmployeeServiceTest {
         Mockito.when(
                 _empService.existsByCUI(ArgumentMatchers.any(Long.class)))
                 .thenReturn(true);
+
         ResponseEntity responseEntity = _empService.createEmployee(emp);
         assertNotNull(responseEntity);
         assertEquals(responseEntity.getStatusCode(), HttpStatus.BAD_REQUEST);
