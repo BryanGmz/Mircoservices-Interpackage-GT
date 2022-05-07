@@ -49,15 +49,15 @@ public class PackageCheckpointService {
         return tempPackageCheckpoint;
     }
 
-    private PackageCheckpoint getByCheckpointIdPackageId(Long checkpointId, Long packageId){
+    public PackageCheckpoint getByCheckpointIdPackageId(Long checkpointId, Long packageId){
         return packageCheckpointRepository.findByCheckpointIdAndPackagesId(checkpointId, packageId);
     }
 
-    private Long getNextCheckpointId(Long packageId, Long routeId){
+    public Long getNextCheckpointId(Long packageId, Long routeId){
         return packageCheckpointRepository.getNextCheckpointId(packageId, routeId);
     }
 
-    private  void update(PackageCheckpoint packageCheckpoint){
+    public  void update(PackageCheckpoint packageCheckpoint){
         packageCheckpointRepository.update(
                 packageCheckpoint.getCurrentCheckpoint(),
                 packageCheckpoint.getTimeOnCheckpoint(),
@@ -74,25 +74,24 @@ public class PackageCheckpointService {
     }
 
     public void process(PackageCheckpoint  packageCheckpoint) throws Exception {
-            if(packageCheckpoint.getTimeOnCheckpoint() == null)
+        if(packageCheckpoint.getTimeOnCheckpoint() == null)
                 throw  new BadRequestException("Tiempo es un campo obligatorio");
 
-            if(packageCheckpoint.getTimeOnCheckpoint().toString().isBlank() || packageCheckpoint.getTimeOnCheckpoint().toString().isEmpty())
-                throw  new BadRequestException("Tiempo no valido");
+        if(packageCheckpoint.getTimeOnCheckpoint().toString().isBlank() || packageCheckpoint.getTimeOnCheckpoint().toString().isEmpty())
+            throw  new BadRequestException("Tiempo no valido");
 
-            //Obtener instancia con todos los datos almacenados en la base de datos.
-            PackageCheckpoint tempPackageCheckpoint = this.getByCheckpointIdPackageId(
-                    packageCheckpoint.getCheckpoint().getId(),
-                    packageCheckpoint.getPackages().getId());
+        //Obtener instancia con todos los datos almacenados en la base de datos.
+        PackageCheckpoint tempPackageCheckpoint = this.getByCheckpointIdPackageId(
+                packageCheckpoint.getCheckpoint().getId(),
+                packageCheckpoint.getPackages().getId());
 
-            //Obtener el id del siguiente punto de control.
-            Long nextCheckpointId = this.getNextCheckpointId(
-                    tempPackageCheckpoint.getPackages().getId(),
-                    tempPackageCheckpoint.getCheckpoint().getRoute().getId());
+        //Obtener el id del siguiente punto de control.
+        Long nextCheckpointId = this.getNextCheckpointId(
+                tempPackageCheckpoint.getPackages().getId(),
+                tempPackageCheckpoint.getCheckpoint().getRoute().getId());
 
             //Enviar paquete a siguiente punto de control
-            if(nextCheckpointId != null){
-
+            if(null != nextCheckpointId){
                 //Obtener punto de control siguiente
                 Checkpoint nextChekpoint = checkpointService.getCheckpointById(nextCheckpointId);
 
@@ -118,6 +117,7 @@ public class PackageCheckpointService {
                 else
                     throw  new BadRequestException("No se puede procesar el paquete. La cola del siguiente punto de control se encuentra llena.");
             }
+
 
             //Enviar paquete a destino
             else{

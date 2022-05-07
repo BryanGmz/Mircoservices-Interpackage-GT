@@ -22,28 +22,22 @@ public class RouteService {
     public Route update(Route route) throws BadRequestException{
         this.validateRouteData(route);
         Route updatedRoute = this.getRouteById(route.getId());
-        this.validateNoPackagesOnRoute(updatedRoute);
         updatedRoute.setName(route.getName());
         updatedRoute.setActive(route.getActive());
         updatedRoute.setDestination(route.getDestination());
         return routeRepository.save(updatedRoute);
     }
 
-    private boolean existsAndIdIsNot(String name, Long id){
+    public boolean existsAndIdIsNot(String name, Long id){
         return routeRepository.existsRouteByNameAndIdIsNot(name, id);
     }
 
-    private void validateRouteData(Route route) throws BadRequestException{
+    public void validateRouteData(Route route) throws BadRequestException{
         if(route.getName().isBlank() || route.getName().isEmpty())
             throw new BadRequestException("Nombre de ruta no valido");
 
         if(this.existsAndIdIsNot(route.getName(), route.getId()))
             throw new BadRequestException("Nombre de ruta ya registrado en el sistema");
-    }
-
-    private void validateNoPackagesOnRoute(Route route) throws BadRequestException{
-        if(route.getPackagesOnRoute() > 0)
-            throw new BadRequestException("No se pueden realizar acciones sobre una ruta que contiene paquetes en ruta.");
     }
 
     public Route getRouteById(Long id) throws BadRequestException{

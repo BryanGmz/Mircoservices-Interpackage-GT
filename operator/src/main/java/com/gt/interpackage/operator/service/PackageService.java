@@ -24,16 +24,13 @@ public class PackageService {
 
     public Package update(Package packages, Long id) throws Exception {
         Package pack = getById(id);
-        if(pack != null) {
-            pack.setDescription(packages.getDescription());
-            pack.setOnWay(packages.getOnWay());
-            pack.setRetired(packages.getRetired());
-            pack.setAtDestination(packages.getAtDestination());
-            pack.setUnitTotal(packages.getUnitTotal());
-            pack.setRoute(packages.getRoute());
-            pack.setWeight(packages.getWeight());
-            return packageRepository.save(pack);
-        } return null;
+        pack.setDescription(packages.getDescription());
+        pack.setOnWay(packages.getOnWay());
+        pack.setRetired(packages.getRetired());
+        pack.setAtDestination(packages.getAtDestination());
+        pack.setUnitTotal(packages.getUnitTotal());
+        pack.setRoute(packages.getRoute());
+        pack.setWeight(packages.getWeight());
+        return packageRepository.save(pack);
     }
-
 }
