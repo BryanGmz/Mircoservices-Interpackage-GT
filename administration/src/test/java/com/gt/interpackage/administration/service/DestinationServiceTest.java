@@ -13,6 +13,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+import java.util.Arrays;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class DestinationServiceTest {
@@ -207,5 +210,4 @@ public class DestinationServiceTest {
         Destination updatedDestination = destinationService.update(tempDestination);
         assertEquals("Guatemala", updatedDestination.getName());
     }
-
 }
