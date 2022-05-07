@@ -13,9 +13,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-import java.util.Arrays;
-import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 public class DestinationServiceTest {
@@ -131,7 +128,6 @@ public class DestinationServiceTest {
         assertEquals(list.size(), 1);
         Mockito.verify(destinationRepository).findAll();
     }
-<<<<<<< HEAD
 
     @Test
     public void testGetDestinationByIdExist() throws BadRequestException {

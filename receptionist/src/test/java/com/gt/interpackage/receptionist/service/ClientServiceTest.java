@@ -95,6 +95,17 @@ public class ClientServiceTest {
     
     
     @Test
+    public void testCreateClientException() throws Exception {
+        Mockito.when(
+            _clientService.existsByCui(ArgumentMatchers.any(Long.class)))
+                .thenThrow(new Exception());
+        ResponseEntity responseEntity = _clientService.createClient(client);
+        assertNotNull(responseEntity);
+        assertEquals(responseEntity.getStatusCode(), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+    
+    
+    @Test
     public void testCreateClientCUIExists() throws Exception {
         Mockito.when(
                 _clientRepository.save(ArgumentMatchers.any(Client.class)))

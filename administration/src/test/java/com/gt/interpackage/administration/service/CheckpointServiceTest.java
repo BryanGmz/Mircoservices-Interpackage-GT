@@ -295,7 +295,6 @@ public class CheckpointServiceTest {
         assertNotNull(list);
         assertEquals(list.size(), 1);
     }
-<<<<<<< HEAD
 
     @Test
     public void testGetCheckpointById2() throws BadRequestException {

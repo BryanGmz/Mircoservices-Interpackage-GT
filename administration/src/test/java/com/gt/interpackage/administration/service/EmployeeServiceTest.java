@@ -182,8 +182,7 @@ public class EmployeeServiceTest {
         Mockito.verify(_empRepository).getById(ArgumentMatchers.any(Long.class));
     }
     
- 
-    
+
     @Test
     public void testCreateEmployeeCUIExists(){
         Mockito.when(
@@ -215,10 +214,12 @@ public class EmployeeServiceTest {
         Mockito.when(
                 _empRepository.save(ArgumentMatchers.any(Employee.class)))
                 .thenReturn(emp);
+        Mockito.when(
+                _empService.existsByCUI(ArgumentMatchers.any(Long.class)))
+                .thenReturn(true);
         ResponseEntity responseEntity = _empService.createEmployee(emp);
         assertNotNull(responseEntity);
-        assertEquals(responseEntity.getStatusCode(), HttpStatus.CREATED);
-        Mockito.verify(_empRepository).save(ArgumentMatchers.any(Employee.class));
+        assertEquals(responseEntity.getStatusCode(), HttpStatus.BAD_REQUEST);
     }
 
 }
